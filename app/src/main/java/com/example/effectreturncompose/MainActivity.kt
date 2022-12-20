@@ -12,6 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -102,6 +104,7 @@ fun usePointInput(initialize: Point): Result {
                 selected = usePoint,
                 onClick = { setUsePoint(true) },
                 enabled = !checkedUsesAllPoint,
+                modifier = Modifier.semantics { testTag = "RadioUsePoint" },
             )
             Text(
                 text = "使用する",
@@ -118,6 +121,7 @@ fun usePointInput(initialize: Point): Result {
                 selected = !usePoint,
                 onClick = { setUsePoint(false) },
                 enabled = !checkedUsesAllPoint,
+                modifier = Modifier.semantics { testTag = "RadioNotUsePoint" },
             )
             Text(
                 text = "使用しない",
@@ -133,6 +137,7 @@ fun usePointInput(initialize: Point): Result {
             Checkbox(
                 checked = checkedUsesAllPoint,
                 onCheckedChange = { setCheckedUsesAllPoint(!checkedUsesAllPoint) },
+                modifier = Modifier.semantics { testTag = "CheckUsesAllPoints" },
             )
             Text(
                 text = "すべてのポイントを使用する",
@@ -147,7 +152,8 @@ fun usePointInput(initialize: Point): Result {
                 value = inputPoint,
                 onValueChange = { setInputPoint(it) },
                 label = { Text("使用するポイント") },
-                enabled = !checkedUsesAllPoint && usePoint
+                enabled = !checkedUsesAllPoint && usePoint,
+                modifier = Modifier.semantics { testTag = "InputUsingPoint" },
             )
         }
     }
